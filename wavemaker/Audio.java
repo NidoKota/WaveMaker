@@ -21,9 +21,9 @@ public class Audio
     /*
     * 入力データから波を生成してbyte型の配列に変換する
     */
-    public static byte[] inputDataToAudioDataArray(InputData inputData, int sampling, double time, double scaling)
+    public static byte[] inputDataToAudioDataArray(InputData inputData, int samplingRate, double time, double scaling)
     {
-        int dataLength = (int)(sampling * time);
+        int dataLength = (int)(samplingRate * time);
 
         //波形の計算し結果を入れる
         ArrayList<Double> rawDataArrayList = new ArrayList<>();
@@ -31,16 +31,16 @@ public class Audio
         {
             switch (inputData.waveType) {
                 case Sin:
-                    rawDataArrayList.add(Wave.getSin(i / (double)sampling, inputData.fo));
+                    rawDataArrayList.add(Wave.getSin(i / (double)samplingRate, inputData.fo));
                     break;
                 case Tri:
-                    rawDataArrayList.add(Wave.getTri(i / (double)sampling, inputData.fo, inputData.n));
+                    rawDataArrayList.add(Wave.getTri(i / (double)samplingRate, inputData.fo, inputData.n));
                     break;
                 case Sqr:
-                    rawDataArrayList.add(Wave.getSqr(i / (double)sampling, inputData.fo, inputData.n));
+                    rawDataArrayList.add(Wave.getSqr(i / (double)samplingRate, inputData.fo, inputData.n));
                     break;
                 case Saw:
-                    rawDataArrayList.add(Wave.getSaw(i / (double)sampling, inputData.fo, inputData.n));
+                    rawDataArrayList.add(Wave.getSaw(i / (double)samplingRate, inputData.fo, inputData.n));
                     break;
             }
         }
@@ -56,8 +56,7 @@ public class Audio
         //AudioInputStreamはbyte型しか受け付けない
         //16bit = 2 * 8bit = 2 * 1byte なので要素数を2倍する
         byte[] dataArray = new byte[dataLength * 2];
-    
-        //Javaにはunsign〇〇型がないので、char型で代用する
+        
         //AudioInputStreamはbyte型しか受け付けない
         //char型を分解し2つのbyte型変数に格納する
         int dattaArrayIndex = 0;
@@ -81,14 +80,12 @@ public class Audio
     /*
     * byteの配列をwavファイルに出力する
     */
-    public static void exportAudio(byte[] audioDataArray, int sampling)
+    public static void exportAudio(byte[] audioDataArray, int samplingRate)
     {
-        //全て正の数にしたのでPCM_UNSIGNEDにする
-        //big endianで格納したので最後の引数はtrueにする
         AudioFormat audioFormat = 
-            new AudioFormat(AudioFormat.Encoding.PCM_SIGNED, sampling, 16, 1, 6, sampling, false);
+            new AudioFormat(AudioFormat.Encoding.PCM_SIGNED, samplingRate, 16, 1, 6, samplingRate, false);
         InputStream in = new ByteArrayInputStream(audioDataArray);
-        AudioInputStream ais = new AudioInputStream(in, audioFormat, sampling);
+        AudioInputStream ais = new AudioInputStream(in, audioFormat, samplingRate);
 
         File outputFile = new File("result.wav");
 
