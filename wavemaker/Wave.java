@@ -35,7 +35,7 @@ public class Wave extends Object
 	public static double getSqr(double t, int fo, int n)
     {
         double value = 0;
-        for (int k = 1; k <= n; k++) value += Math.sin((2.0 * k - 1.0) * 2.0 * Math.PI * fo * t) / (2.0 * k - 1.0);
+        for (int k = 0; k <= ((n + 1) / 2); k++) value += Math.sin((2.0 * (k+1) - 1.0) * 2.0 * Math.PI * fo * t) / (2.0 * (k+1) - 1.0);
         value *= 4.0 / Math.PI;
         return value;
     }

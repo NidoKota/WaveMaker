@@ -18,4 +18,9 @@ public class InputData extends Object
         this.fo = fo;
         this.waveType = waveType;
     }
+
+    public String toString()
+	{
+        return waveType.name() + "_" + String.valueOf(fo) + ((waveType == WaveType.Sin) ? "" : "_" + String.valueOf(n));
+	}
 }

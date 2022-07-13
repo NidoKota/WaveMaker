@@ -80,14 +80,14 @@ public class Audio
     /*
     * byteの配列をwavファイルに出力する
     */
-    public static void exportAudio(byte[] audioDataArray, int samplingRate)
+    public static void exportAudio(byte[] audioDataArray, int samplingRate, String filePath)
     {
         AudioFormat audioFormat = 
             new AudioFormat(AudioFormat.Encoding.PCM_SIGNED, samplingRate, 16, 1, 6, samplingRate, false);
         InputStream in = new ByteArrayInputStream(audioDataArray);
         AudioInputStream ais = new AudioInputStream(in, audioFormat, samplingRate);
 
-        File outputFile = new File("result.wav");
+        File outputFile = new File(filePath);
 
 		try
 		{
