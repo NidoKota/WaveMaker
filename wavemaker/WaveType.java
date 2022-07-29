@@ -1,6 +1,3 @@
-//2054272
-//松原 光汰
-
 package wavemaker;
 
 /*
@@ -8,8 +5,8 @@ package wavemaker;
 */
 public enum WaveType
 {
-	Sin,
-	Tri,
-	Sqr,
-	Saw
+    Sin,
+    Tri,
+    Sqr,
+    Saw
 }

@@ -1,6 +1,3 @@
-//2054272
-//松原 光汰
-
 package wavemaker;
 
 import java.io.File;
@@ -89,13 +86,13 @@ public class Audio
 
         File outputFile = new File(filePath);
 
-		try
-		{
+        try
+        {
             AudioSystem.write(ais, AudioFileFormat.Type.WAVE, outputFile);
-		} 
-		catch (IOException e)
-		{
-			e.printStackTrace();
-		}
+        } 
+        catch (IOException e)
+        {
+            e.printStackTrace();
+        }
     }
 }

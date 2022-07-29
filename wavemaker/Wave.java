@@ -1,6 +1,3 @@
-//2054272
-//松原 光汰
-
 package wavemaker;
 
 import java.lang.Math;
@@ -10,18 +7,18 @@ import java.lang.Math;
 */
 public class Wave extends Object
 {
-	/*
-	* 正弦波
-	*/
-	public static double getSin(double t, int fo)
+    /*
+    * 正弦波
+    */
+    public static double getSin(double t, int fo)
     {
         return Math.sin(2.0 * Math.PI * fo * t);
     }
 
-	/*
-	* 三角波
-	*/
-	public static double getTri(double t, int fo, int n)
+    /*
+    * 三角波
+    */
+    public static double getTri(double t, int fo, int n)
     {
         double value = 0;
         for (int k = 1; k <= n; k++) value += Math.sin(k * Math.PI / 2.0) * Math.sin(k * 2.0 * Math.PI * fo * t) / Math.pow(k, 2);
@@ -29,10 +26,10 @@ public class Wave extends Object
         return value;
     }
 
-	/*
-	* 矩形波
-	*/
-	public static double getSqr(double t, int fo, int n)
+    /*
+    * 矩形波
+    */
+    public static double getSqr(double t, int fo, int n)
     {
         double value = 0;
         for (int k = 0; k <= ((n + 1) / 2); k++) value += Math.sin((2.0 * (k+1) - 1.0) * 2.0 * Math.PI * fo * t) / (2.0 * (k+1) - 1.0);
@@ -40,10 +37,10 @@ public class Wave extends Object
         return value;
     }
 
-	/*
-	* ノコギリ波
-	*/
-	public static double getSaw(double t, int fo, int n)
+    /*
+    * ノコギリ波
+    */
+    public static double getSaw(double t, int fo, int n)
     {
         double value = 0;
         for (int k = 1; k <= n; k++) value += Math.sin(k * 2.0 * Math.PI * fo * t) / k;

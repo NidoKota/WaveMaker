@@ -1,6 +1,3 @@
-//2054272
-//松原 光汰
-
 package wavemaker;
 
 /*
@@ -20,7 +17,7 @@ public class InputData extends Object
     }
 
     public String toString()
-	{
+    {
         return waveType.name() + "_" + String.valueOf(fo) + ((waveType == WaveType.Sin) ? "" : "_" + String.valueOf(n));
-	}
+    }
 }

@@ -1,35 +1,35 @@
-ANT	= env LC_ALL=ja_JP.UTF-8 ant
-ARCHIVE	= $(shell basename `pwd`)
-SOURCES	= $(shell find . -name "*.java")
-STYLE_YAML	= clang-format-for-java.yaml
-STYLE_CONF	= _clang-format
+ANT    = env LC_ALL=ja_JP.UTF-8 ant
+ARCHIVE    = $(shell basename `pwd`)
+SOURCES    = $(shell find . -name "*.java")
+STYLE_YAML    = clang-format-for-java.yaml
+STYLE_CONF    = _clang-format
 
 all:
-	$(ANT) all
+    $(ANT) all
 
 clean:
-	$(ANT) clean
+    $(ANT) clean
 
 test:
-	$(ANT) test
+    $(ANT) test
 
 install:
-	$(ANT) install
+    $(ANT) install
 
 doc:
-	$(ANT) doc
+    $(ANT) doc
 
 wipe: clean
-	@find . -name ".DS_Store" -exec rm {} ";" -exec echo rm -f {} ";"
-	(cd ../ ; rm -f ./$(ARCHIVE).zip)
+    @find . -name ".DS_Store" -exec rm {} ";" -exec echo rm -f {} ";"
+    (cd ../ ; rm -f ./$(ARCHIVE).zip)
 
 #zip:
-#	$(ANT) zip
+#    $(ANT) zip
 
 zip: wipe
-	(cd ../ ; zip -r ./$(ARCHIVE).zip ./$(ARCHIVE)/ --exclude='*/.svn/*')
+    (cd ../ ; zip -r ./$(ARCHIVE).zip ./$(ARCHIVE)/ --exclude='*/.svn/*')
 
 format:
-	@rm -f $(STYLE_CONF) ; ln -s $(STYLE_YAML) $(STYLE_CONF)
-	for each in $(SOURCES) ; do echo ---[$${each}]--- ; clang-format -style=file $${each} ; echo ; done
-	@rm -f $(STYLE_CONF)
+    @rm -f $(STYLE_CONF) ; ln -s $(STYLE_YAML) $(STYLE_CONF)
+    for each in $(SOURCES) ; do echo ---[$${each}]--- ; clang-format -style=file $${each} ; echo ; done
+    @rm -f $(STYLE_CONF)
